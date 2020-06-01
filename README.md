@@ -1,1 +1,1 @@
-Pequeno sistema de comentarios com CRUD básico.
+Pequeno sistema de comentarios com CRUD básico e sistema de login.
