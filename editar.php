@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'config.php';
 
 if(isset($_GET['id']) && !empty($_GET['id'])){
@@ -20,7 +20,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 <?php
     if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
         $mensagem = filter_var($_POST['mensagem'], FILTER_SANITIZE_STRING);
-        $sql = $pdo->prepare("UPDATE mensagens SET msg = :msg");
+        $sql = $pdo->prepare("UPDATE mensagens SET msg = :msg WHERE id = '$id'");
         $sql->bindValue(':msg', $mensagem);
         $sql->execute();
 

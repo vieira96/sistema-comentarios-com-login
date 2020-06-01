@@ -1,13 +1,18 @@
 <?php
+session_start();
 require 'config.php';
 
-if(isset($_POST['nome']) && !empty($_POST['nome'])){
-    $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
+
+if(empty($_SESSION['logado'])){
+    header("Location: login.php");
+    exit;
+}
+
+if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
+    $nome = $_SESSION['nome'];
     $mensagem = filter_var($_POST['mensagem'], FILTER_SANITIZE_STRING);
 
-
-    $sql = $pdo->prepare("INSERT INTO mensagens (nome, msg, data_msg) VALUES (:nome, :msg, NOW())");
-    $sql->bindValue(':nome', $nome);
+    $sql = $pdo->prepare("INSERT INTO mensagens (nome, msg, data_msg) VALUES ('$nome', :msg, NOW())");
     $sql->bindValue(':msg', $mensagem);
     $sql->execute();
 
@@ -17,7 +22,6 @@ if(isset($_POST['nome']) && !empty($_POST['nome'])){
 
 <fieldset>
     <form method="POST">
-        <input type="text" name="nome" placeholder="Digite seu nome..." /><br><br>
         <textarea name="mensagem" placeholder="Digite sua mensagem..."></textarea><br><br>
         <input type="submit" value="Enviar mensagem" />
     </form>
@@ -32,7 +36,13 @@ if($sql->rowCount() > 0){
 ?>
     <?= $mensagem['nome']; ?><br><br>
     <?= $mensagem['msg']; ?><br><br>
+    <?php
+        if($mensagem['nome'] == $_SESSION['nome']):
+    ?>
     <a href="deletar.php?id=<?= $mensagem['id']?>">Deletar</a> - <a href="editar.php?id=<?= $mensagem['id']?>">Editar</a> <br>
+    <?php
+        endif;
+    ?>
     <hr>
 
 <?php
@@ -40,5 +50,5 @@ if($sql->rowCount() > 0){
 }else{
     echo "Nenhuma mensagem!";
 }
-
 ?>
+<a href="sair.php">Sair</a>

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'config.php';
 
 if(isset($_GET['id']) && !empty($_GET['id'])){
