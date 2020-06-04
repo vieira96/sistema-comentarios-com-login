@@ -27,6 +27,8 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Comentarios</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <script src="https://kit.fontawesome.com/6cb3d6337d.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -51,8 +53,8 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
             
             foreach($sql->fetchAll() as $mensagem):
         ?>
-            <div class="row align-items-center">
-                <div class="col-sm-10" style="word-wrap: break-word;">
+            <div style="height: auto;" class="row align-items-center">
+                <div class="col-sm-12" style="word-wrap: break-word;">
                 <?= $mensagem['nome']; ?><br><br>
                 <?= $mensagem['msg']; ?><br><br>
                 </div>
@@ -60,7 +62,7 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
                     if($mensagem['nome'] == $_SESSION['nome']):
                 ?>
                 <div class="col-sm-2">
-                <a class="btn btn-danger" href="deletar.php?id=<?= $mensagem['id']?>">Deletar</a> - <a class="btn btn-dark" href="editar.php?id=<?= $mensagem['id']?>">Editar</a> <br>
+                    <a class="btn btn-primary" href="editar.php?id=<?= $mensagem['id']?>"><i class="far fa-edit"></i></a> <a class="btn btn-danger" href="deletar.php?id=<?= $mensagem['id']?>"><i class="far fa-trash-alt"></i></a>
                 </div>
                 <?php
                     endif;

@@ -26,10 +26,39 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
 
 ?>
 
-<h3>Criar conta</h3>
-<form method="POST">
-    <input type="text" name="nome" placeholder="Nome..." /><br><br>
-    <input type="email" name="email" placeholder="Email..." /><br><br>
-    <input type="password" name="senha" placeholder="Senha..." /><br><br>
-    <input type="submit" value="Criar" />
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <style type="text/css">
+        .form-control {
+            max-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            <h3>Criar conta</h3>
+            <div class="form-group">
+                <input class="form-control" type="text" name="nome" placeholder="Nome..." />
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="Email..." />
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="senha" placeholder="Senha..." />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-success" type="submit" value="Criar"/> <a href="login.php" class="btn btn-warning">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script> 
+</body>
+</html>
+

@@ -28,7 +28,33 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     }
 ?>
 
-<form method="POST">
-    <textarea name="mensagem"><?= $mensagem['msg']?></textarea><br><br>
-    <input type="submit" value="confirmar"/>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <style type="text/css">
+        .form-control {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <form method="POST">
+                <div class="form-group">
+                    <textarea class="form-control" name="mensagem"><?= $mensagem['msg']?></textarea>
+                </div> 
+                <div class="form-group">
+                    <input class="btn btn-success" type="submit" value="confirmar"/> <a class="btn btn-warning" href="index.php">Cencelar</a>
+                </form>
+            </form>
+        </div>
+       
+    <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>  
+</body>
+</html>
+
