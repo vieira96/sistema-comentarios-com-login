@@ -30,47 +30,52 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
 </head>
 
 <body>
-<div class="container">
-<fieldset>
-    <form method="POST">
-        <textarea name="mensagem" placeholder="Digite sua mensagem..."></textarea><br><br>
-        <input class="btn btn-success" type="submit" value="Enviar mensagem" />
-    </form>
-</fieldset><br>
+    <div class="container">
 
-<?php
+        <fieldset>
+            <form method="POST" style="margin-top: 5px;">
+                <div class="form-group shadow-textarea">
+                    <textarea class="form-control z-depth-1" name="mensagem" rows="2" placeholder="Sua mensagem..."></textarea>
+                </div>
 
-$sql = "SELECT * FROM mensagens ORDER BY data_msg";
-$sql = $pdo->query($sql);
-if($sql->rowCount() > 0){
-    
-    foreach($sql->fetchAll() as $mensagem):
-?>
-    <div class="row align-items-center">
-        <div class="col-sm-10" style="word-wrap: break-word;">
-        <?= $mensagem['nome']; ?><br><br>
-        <?= $mensagem['msg']; ?><br><br>
-        </div>
+                
+                <input class="btn btn-success" type="submit" value="Enviar mensagem" />
+            </form>
+        </fieldset><br>
+
         <?php
-            if($mensagem['nome'] == $_SESSION['nome']):
+
+        $sql = "SELECT * FROM mensagens ORDER BY data_msg";
+        $sql = $pdo->query($sql);
+        if($sql->rowCount() > 0){
+            
+            foreach($sql->fetchAll() as $mensagem):
         ?>
-        <div class="col-sm-2">
-        <a class="btn btn-danger" href="deletar.php?id=<?= $mensagem['id']?>">Deletar</a> - <a class="btn btn-dark" href="editar.php?id=<?= $mensagem['id']?>">Editar</a> <br>
-        </div>
+            <div class="row align-items-center">
+                <div class="col-sm-10" style="word-wrap: break-word;">
+                <?= $mensagem['nome']; ?><br><br>
+                <?= $mensagem['msg']; ?><br><br>
+                </div>
+                <?php
+                    if($mensagem['nome'] == $_SESSION['nome']):
+                ?>
+                <div class="col-sm-2">
+                <a class="btn btn-danger" href="deletar.php?id=<?= $mensagem['id']?>">Deletar</a> - <a class="btn btn-dark" href="editar.php?id=<?= $mensagem['id']?>">Editar</a> <br>
+                </div>
+                <?php
+                    endif;
+                ?>
+            </div>
+            <hr>
+
         <?php
-            endif;
+            endforeach;
+        }else{
+            echo "Nenhuma mensagem!";
+        }
         ?>
+        <a href="sair.php">Sair</a>
     </div>
-    <hr>
-
-<?php
-    endforeach;
-}else{
-    echo "Nenhuma mensagem!";
-}
-?>
-<a href="sair.php">Sair</a>
-</div>
 <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>    
 </body>
