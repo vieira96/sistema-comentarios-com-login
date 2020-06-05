@@ -22,7 +22,16 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
         header("Location: index.php");
         exit;
     }else{
-        echo "Usuário não encontrado";
+        ?>  
+            <div class="container">
+            <div class="alert alert-dismissible alert-danger" role="alert" style="max-width: 290px;">
+                Email e/ou senha incorretos
+                <a class="close" data-dismiss="alert" aria-label="Fechar">
+                    <span style="cursor: pointer;" aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            </div>
+        <?php
     }
 }
 

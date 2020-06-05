@@ -34,17 +34,6 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
 <body style="background-color: #1c1e21;">
     <div class="container">
 
-        <fieldset>
-            <form method="POST" style="margin-top: 5px;">
-                <div class="form-group shadow-textarea">
-                    <textarea class="form-control z-depth-1" name="mensagem" rows="2" placeholder="Seu comentário..."></textarea>
-                </div>
-
-                
-                <input class="btn btn-success" type="submit" value="Comentar" />
-            </form>
-        </fieldset><br>
-
         <?php
 
         $sql = "SELECT * FROM mensagens ORDER BY data_msg";
@@ -81,6 +70,14 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
             echo "Nenhuma mensagem!";
         }
         ?>
+        <fieldset class="dark">
+            <form method="POST" style="margin-top: 5px;">
+                <div class="form-group shadow-textarea">
+                    <textarea class="form-control z-depth-1" name="mensagem" rows="2" placeholder="Seu comentário..."></textarea>
+                </div>
+                <input class="btn btn-success" type="submit" value="Comentar" />
+            </form>
+        </fieldset><br>
         <a href="sair.php">Sair</a>
     </div>
 <script type="text/javascript" src="assets/js/jquery-3.5.1.min.js"></script>

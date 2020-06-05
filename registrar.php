@@ -9,18 +9,41 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
     $sql->bindValue(':email', $email);
     $sql->execute();
     if($sql->rowCount() > 0){
-        echo "O usuario ja existe";
+        ?>
+            <div class="container">
+            <div class="alert alert-dismissible alert-danger" role="alert" style="max-width: 290px;">
+                E-mail ja registrado!
+                <a class="close" data-dismiss="alert" aria-label="Fechar">
+                    <span style="cursor: pointer;" aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            </div>
+        <?php
     }else{
         $nome = filter_var($_POST['nome'], FILTER_SANITIZE_STRING);
         $senha = md5(filter_var($_POST['senha'], FILTER_SANITIZE_STRING));
-        $sql = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)");
-        $sql->bindValue(':email', $email);
-        $sql->bindValue(':nome', $nome);
-        $sql->bindValue(':senha', $senha);
-        $sql->execute();
-        unset($_SESSION['logado']);
-        var_dump($email, $nome, $senha);
-        header("Location: login.php");
+        $confirmaSenha = md5(filter_var($_POST['confirma_senha'], FILTER_SANITIZE_STRING));
+        if($confirmaSenha == $senha){
+            $sql = $pdo->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (:nome, :email, :senha)");
+            $sql->bindValue(':email', $email);
+            $sql->bindValue(':nome', $nome);
+            $sql->bindValue(':senha', $senha);
+            $sql->execute();
+            unset($_SESSION['logado']);
+            header("Location: login.php");
+        }else{
+            ?>
+            <div class="container">
+            <div class="alert alert-dismissible alert-danger" role="alert" style="max-width: 290px;">
+                Senhas não conferem!
+                <a class="close" data-dismiss="alert" aria-label="Fechar">
+                    <span style="cursor: pointer;" aria-hidden="true">&times;</span>
+                </a>
+            </div>
+            </div>
+
+            <?php
+        }
     }
 }
 
@@ -51,6 +74,9 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="senha" placeholder="Senha..." />
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="confirma_senha" placeholder="Confirmar senha..." />
             </div>
             <div class="form-group">
                 <input class="btn btn-success" type="submit" value="Criar"/> <a href="login.php" class="btn btn-warning">Cancelar</a>
