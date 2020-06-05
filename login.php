@@ -40,11 +40,11 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
         }
     </style>
 </head>
-<body>
+<body style="background-color: #1c1e21;">
     <div class="container">
         <form method="POST">
             <div class="form-group">
-                <h3>Logar</h3>
+                <h3 style="color: white;">Logar</h3>
             </div>
             <div class="form-group">
                 <input class="form-control" type="email" name="email" placeholder="Email..." />

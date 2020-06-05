@@ -41,7 +41,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         }
     </style>
 </head>
-<body>
+<body style="background-color: #1c1e21;">
         <div class="container">
             <form method="POST">
                 <div class="form-group">

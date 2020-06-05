@@ -39,10 +39,10 @@ if(isset($_POST['email']) && !empty($_POST['email'])){
         }
     </style>
 </head>
-<body>
+<body style="background-color: #1c1e21;">
     <div class="container">
         <form method="POST">
-            <h3>Criar conta</h3>
+            <h3 style="color: white;">Criar conta</h3>
             <div class="form-group">
                 <input class="form-control" type="text" name="nome" placeholder="Nome..." />
             </div>

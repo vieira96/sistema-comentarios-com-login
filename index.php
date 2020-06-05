@@ -31,17 +31,17 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
 
 </head>
 
-<body>
+<body style="background-color: #1c1e21;">
     <div class="container">
 
         <fieldset>
             <form method="POST" style="margin-top: 5px;">
                 <div class="form-group shadow-textarea">
-                    <textarea class="form-control z-depth-1" name="mensagem" rows="2" placeholder="Sua mensagem..."></textarea>
+                    <textarea class="form-control z-depth-1" name="mensagem" rows="2" placeholder="Seu comentário..."></textarea>
                 </div>
 
                 
-                <input class="btn btn-success" type="submit" value="Enviar mensagem" />
+                <input class="btn btn-success" type="submit" value="Comentar" />
             </form>
         </fieldset><br>
 
@@ -53,22 +53,27 @@ if(isset($_POST['mensagem']) && !empty($_POST['mensagem'])){
             
             foreach($sql->fetchAll() as $mensagem):
         ?>
-            <div style="height: auto;" class="row align-items-center">
-                <div class="col-sm-12" style="word-wrap: break-word;">
-                <?= $mensagem['nome']; ?><br><br>
-                <?= $mensagem['msg']; ?><br><br>
-                </div>
-                <?php
+            <div class="list-group" style="margin-bottom: 5px; border-radius: 20px;">
+                <div class="list-group-item" style="background-color: #262729; color: white; height: auto;">
+                    <div class="d-flex">
+                        <?= $mensagem['nome']; ?><br><br>
+                    </div>
+                    <span style="word-wrap: break-word;">
+                        <?= $mensagem['msg']; ?><br><br>
+                    </span>
+
+                    <?php
                     if($mensagem['nome'] == $_SESSION['nome']):
                 ?>
-                <div class="col-sm-2">
+                <div>
                     <a class="btn btn-primary" href="editar.php?id=<?= $mensagem['id']?>"><i class="far fa-edit"></i></a> <a class="btn btn-danger" href="deletar.php?id=<?= $mensagem['id']?>"><i class="far fa-trash-alt"></i></a>
                 </div>
                 <?php
                     endif;
                 ?>
+                </div>
             </div>
-            <hr>
+               
 
         <?php
             endforeach;
